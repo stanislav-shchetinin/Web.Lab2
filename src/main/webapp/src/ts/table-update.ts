@@ -5,19 +5,24 @@
 //     );
 // };
 
-// const clearTable = (): void => {
-//     let table: Element = document.querySelector(".table-hits");
-//     table.innerHTML = `
-//             <tr>
-//                 <th>X</th>
-//                 <th>Y</th>
-//                 <th>R</th>
-//                 <th>Успех?</th>
-//                 <th>Время работы</th>
-//             </tr>
-//         `;
-//     saveTable();
-// };
+const clearTable = (): void => {
+    let xhr: XMLHttpRequest = new XMLHttpRequest();
+    xhr.open(
+        "DELETE",
+        "./controller"
+    );
+    xhr.send();
+    const table: Element = document.querySelector(".table-hits");
+    table.innerHTML = `
+        <tr>
+            <th>X</th>
+            <th>Y</th>
+            <th>R</th>
+            <th>Успех?</th>
+            <th>Время работы</th>
+        </tr>
+    `
+};
 
 const responseHandler = (response: string): void => {
     console.log(response)
