@@ -1,6 +1,5 @@
 <%@ page import="org.example.models.HtmlTable" %>
 <%@ page import="java.util.Enumeration" %>
-<%@ page import="org.example.utils.Rounder" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <tr>
     <th>X</th>
@@ -13,18 +12,18 @@
     Enumeration<String> names = session.getAttributeNames();
     while (names.hasMoreElements()) {
         String name = names.nextElement();
-        HtmlTable point = (HtmlTable) session.getAttribute(name);
+        HtmlTable htmlTable = (HtmlTable) session.getAttribute(name);
 %>
 <tr>
-    <td><%=Rounder.round(point.getX())%>
+    <td><%=htmlTable.getParameters().getX()%>
     </td>
-    <td><%=Rounder.round(point.getY())%>
+    <td><%=htmlTable.getParameters().getY()%>
     </td>
-    <td><%=Rounder.round(point.getRadius())%>
+    <td><%=htmlTable.getParameters().getR()%>
     </td>
-    <td><%=point.getInRange()%>
+    <td><%=htmlTable.isInArea()%>
     </td>
-    <td><%=point.getRequestTime()%>
+    <td><%=htmlTable.getScriptRunningTime()%>
     </td>
 </tr>
 

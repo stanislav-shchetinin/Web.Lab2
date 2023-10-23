@@ -8,6 +8,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import org.example.models.HtmlTable;
+import org.example.models.Parameters;
 import org.example.utils.Validator;
 
 import java.io.IOException;
@@ -18,15 +19,16 @@ public class AreaCheckServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         try {
-            double start = System.nanoTime();
-            Integer r = Integer.parseInt(req.getParameter("R"));
-            Integer x = Integer.parseInt(req.getParameter("X"));
-            Double y = Double.parseDouble(req.getParameter("Y"));
-            log(String.format("x: %s, y: %s, r: %d", x, y, r));
-            HtmlTable point = new HtmlTable(r, x, y, LocalDateTime.now(), (System.nanoTime() - start) / 1_000_000.0);
+            Parameters parameters = new Parameters()
+                    .buildX(req.getParameter("X"))
+                    .buildY(req.getParameter("Y"))
+                    .buildR(req.getParameter("R"));
+            log(String.format("x: %s, y: %s, r: %d",
+                    parameters.getX(), parameters.getY(), parameters.getR()));
+            HtmlTable htmlTable = new HtmlTable(parameters);
             HttpSession session = req.getSession();
-            String pointHash = String.valueOf(point.hashCode());
-            session.setAttribute(pointHash, point);
+            String pointHash = String.valueOf(htmlTable.hashCode());
+            session.setAttribute(pointHash, htmlTable);
         } catch (Validator.InvalidArgumentException | NumberFormatException e) {
             log("areacheck1");
             e.printStackTrace();

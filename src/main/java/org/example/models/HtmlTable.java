@@ -1,16 +1,17 @@
 package org.example.models;
 
 import lombok.*;
-
-import java.time.LocalDateTime;
+import org.example.utils.ApplicationConstants;
 
 @Getter
-@RequiredArgsConstructor
 public class HtmlTable {
-    private final Integer radius;
-    private final Integer x;
-    private final Double y;
-    private final Boolean inRange;
-    private final LocalDateTime currentTime;
-    private final Double requestTime;
+    private final Parameters parameters;
+    private final boolean isInArea;
+    private final Double scriptRunningTime;
+    public HtmlTable(Parameters parameters){
+        this.parameters = parameters;
+        double startScriptTime = System.nanoTime();
+        this.isInArea = parameters.checkInArea();
+        scriptRunningTime = (System.nanoTime() - startScriptTime) * ApplicationConstants.MICRO_SEC;
+    }
 }
