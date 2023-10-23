@@ -1,9 +1,9 @@
-// const saveTable = (): void => {
-//     localStorage.setItem(
-//         "table",
-//         document.querySelector(".table-hits").innerHTML,
-//     );
-// };
+const saveTable = (): void => {
+    localStorage.setItem(
+        "table",
+        document.querySelector(".table-hits").innerHTML,
+    );
+};
 
 const clearTable = (): void => {
     let xhr: XMLHttpRequest = new XMLHttpRequest();
@@ -22,10 +22,10 @@ const clearTable = (): void => {
             <th>Время работы</th>
         </tr>
     `
+    saveTable();
 };
 
 const responseHandler = (response: string): void => {
-    console.log(response)
     //let data = JSON.parse(response);
     const table: Element = document.querySelector(".table-hits");
     table.innerHTML = response;
@@ -33,5 +33,5 @@ const responseHandler = (response: string): void => {
         behavior: "smooth",
         block: "start",
     });
-    // saveTable();
+    saveTable();
 };
