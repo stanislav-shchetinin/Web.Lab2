@@ -1,5 +1,6 @@
 plugins {
     id 'java'
+    id 'war'
 }
 
 group = 'org.example'
@@ -9,9 +10,21 @@ repositories {
     mavenCentral()
 }
 
+war {
+    rootSpec.exclude("src/main/webapp/node_modules/**")
+    rootSpec.exclude("src/main/webapp/src/ts/**")
+}
+
 dependencies {
     testImplementation platform('org.junit:junit-bom:5.9.1')
     testImplementation 'org.junit.jupiter:junit-jupiter'
+    implementation 'jakarta.servlet:jakarta.servlet-api:5.0.0'
+    compileOnly 'org.projectlombok:lombok:1.18.24'
+    annotationProcessor 'org.projectlombok:lombok:1.18.24'
+    compileOnly 'javax:javaee-web-api:7.0'
+    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.15.2'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.15.2'
+
 }
 
 test {

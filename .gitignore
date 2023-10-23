@@ -40,3 +40,10 @@ bin/
 
 ### Mac OS ###
 .DS_Store
+
+#webapp
+#js
+src/main/webapp/out/js
+#conf
+src/main/webapp/package-lock.json
+src/main/webapp/node_modules
