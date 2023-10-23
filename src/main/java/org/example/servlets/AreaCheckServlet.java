@@ -9,10 +9,8 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import org.example.models.HtmlTable;
 import org.example.models.Parameters;
-import org.example.utils.Validator;
 
 import java.io.IOException;
-import java.time.LocalDateTime;
 
 @WebServlet("/area-check")
 public class AreaCheckServlet extends HttpServlet {
@@ -29,17 +27,10 @@ public class AreaCheckServlet extends HttpServlet {
             HttpSession session = req.getSession();
             String pointHash = String.valueOf(htmlTable.hashCode());
             session.setAttribute(pointHash, htmlTable);
-        } catch (Validator.InvalidArgumentException | NumberFormatException e) {
-            log("areacheck1");
-            e.printStackTrace();
-            resp.sendError(HttpServletResponse.SC_BAD_REQUEST, e.getMessage());
-        }
-
-        RequestDispatcher dispatcher = req.getRequestDispatcher("/check-result.jsp");
-        try {
+            RequestDispatcher dispatcher = req.getRequestDispatcher("/table.jsp");
             dispatcher.forward(req, resp);
-        } catch (IOException | ServletException e) {
-            log("areacheck2");
+        } catch (IllegalArgumentException | ServletException e) {
+            log(e.getMessage());
             e.printStackTrace();
             resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
         }

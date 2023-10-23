@@ -2,7 +2,7 @@ package org.example.models;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.example.utils.ApplicationConstants;
+import org.example.application.ApplicationConstants;
 
 @Getter
 @NoArgsConstructor

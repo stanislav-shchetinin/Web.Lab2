@@ -16,9 +16,9 @@ public class ControllerServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         try {
-            String r = req.getParameter("R");
             String x = req.getParameter("X");
             String y = req.getParameter("Y");
+            String r = req.getParameter("R");
             log(String.format("x: %s, y: %s, r: %s", x, y, r));
             if (Objects.isNull(r) || Objects.isNull(x) ||  Objects.isNull(y) ||
                     r.isBlank() || x.isBlank() || y.isBlank()) {
@@ -30,7 +30,7 @@ public class ControllerServlet extends HttpServlet {
             }
 
         } catch (IOException | ServletException e) {
-            log("controller");
+            log(e.getMessage());
             e.printStackTrace();
             resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
         }
