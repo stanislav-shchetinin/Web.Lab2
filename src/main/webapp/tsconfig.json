@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "alwaysStrict": true,
+    "target": "es6",
+    "module": "commonjs",
+    "experimentalDecorators": true,
+    "removeComments": true,
+    "sourceMap": true,
+    "allowJs": true,
+    "esModuleInterop": true,
+    "strict": false,
+    "outDir": "out/js",
+    "noUnusedLocals": true
+  },
+  "include": [
+    "src/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "**/*.spec.ts"
+  ]
+}
