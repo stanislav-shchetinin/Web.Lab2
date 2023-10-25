@@ -15,7 +15,7 @@
 
     <script src="out/js/main.js" defer></script>
     <script src="out/js/send-request.js" defer></script>
-    <script src="out/js/validation.js" defer></script>
+    <script src="out/js/validation.js?c=26234g2g22rh14h34" defer></script>
     <script src="out/js/table-update.js" defer></script>
 
     <title>Lab1</title>

@@ -15,7 +15,7 @@ import java.io.IOException;
 @WebServlet("/area-check")
 public class AreaCheckServlet extends HttpServlet {
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+    public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         try {
             Parameters parameters = new Parameters()
                     .buildX(req.getParameter("X"))
@@ -25,8 +25,8 @@ public class AreaCheckServlet extends HttpServlet {
                     parameters.getX(), parameters.getY(), parameters.getR()));
             HtmlTable htmlTable = new HtmlTable(parameters);
             HttpSession session = req.getSession();
-            String pointHash = String.valueOf(htmlTable.hashCode());
-            session.setAttribute(pointHash, htmlTable);
+            String htmlTableHash = String.valueOf(htmlTable.hashCode());
+            session.setAttribute(htmlTableHash, htmlTable);
             RequestDispatcher dispatcher = req.getRequestDispatcher("/table.jsp");
             dispatcher.forward(req, resp);
         } catch (IllegalArgumentException | ServletException e) {

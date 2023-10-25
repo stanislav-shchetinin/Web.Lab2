@@ -6,7 +6,8 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-
+import jakarta.servlet.http.HttpSession;
+import org.example.util.Checker;
 import java.io.IOException;
 import java.util.Objects;
 
@@ -14,14 +15,11 @@ import java.util.Objects;
 public class ControllerServlet extends HttpServlet {
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+    public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         try {
-            String x = req.getParameter("X");
-            String y = req.getParameter("Y");
-            String r = req.getParameter("R");
-            log(String.format("x: %s, y: %s, r: %s", x, y, r));
-            if (Objects.isNull(r) || Objects.isNull(x) ||  Objects.isNull(y) ||
-                    r.isBlank() || x.isBlank() || y.isBlank()) {
+            if (Checker.checkEmptyArgs(req.getParameter("X"),
+                    req.getParameter("Y"),
+                    req.getParameter("R"))) {
                 RequestDispatcher dispatcher = req.getRequestDispatcher("/index.jsp");
                 dispatcher.forward(req, resp);
             } else {
@@ -34,6 +32,12 @@ public class ControllerServlet extends HttpServlet {
             e.printStackTrace();
             resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
         }
+    }
+
+    @Override
+    public void doDelete(HttpServletRequest req, HttpServletResponse resp) {
+        HttpSession session = req.getSession();
+        session.invalidate();
     }
 
 }
